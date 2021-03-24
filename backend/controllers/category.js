@@ -1,5 +1,5 @@
 module.exports.getAll = (req, res) => {
-    res.status(200).send('Login page from controller')
+    res.status(200).send('category')
 }
 
 module.exports.getById = (req, res) => {
