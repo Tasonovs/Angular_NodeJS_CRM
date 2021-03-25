@@ -1,4 +1,5 @@
 const User = require("../models/User")
+const errorHandler = require('../utils/errorHandler')
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const keys = require('../config/keys')
@@ -37,9 +38,9 @@ module.exports.register = async function(req, res) {
 
     try {
         await user.save()
-        res.status(201).json({message: `Пользователь '${user.email}' создан.`, obj: user})
+        res.status(201).json({message: `Пользователь '${user.email}' создан.`})
     } catch (error) {
-        res.status(400).json({message: '⚠ Упс... Что-то пошло не так.'})
+        errorHandler(res, error)
     }
 
 }
