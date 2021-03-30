@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../shared/layouts/services/auth.service';
-import { MaterialService } from '../shared/layouts/services/material.service';
+import { AuthService } from '../shared/services/auth.service';
+import { MaterialService } from '../shared/services/material.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,11 +12,11 @@ import { MaterialService } from '../shared/layouts/services/material.service';
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
   //TODO ???
-  authSub = new Subscription
+  authSub!: Subscription
   form = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required, Validators.minLength(6)])
-  });
+  })
 
   constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) { }
 

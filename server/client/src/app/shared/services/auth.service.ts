@@ -1,14 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { User } from "../interfaces/interfaces";
+import { User } from "../interfaces";
 import { tap } from "rxjs/operators"
 
 //TODO ???
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
-  private token: string = ''
+  private token!: string
 
   constructor(private http: HttpClient) {}
 
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   logout() {
-    this.setToken('')
     localStorage.clear()
+    this.setToken('')
   }
 }
