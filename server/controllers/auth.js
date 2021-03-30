@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const keys = require('../config/keys')
 
+const tokenExpiresInSec = 1 * 60 * 60
+
 
 module.exports.login = async function(req, res) {
     const candidate = await User.findOne({ email: req.body.email })
@@ -21,7 +23,7 @@ module.exports.login = async function(req, res) {
     const token = jwt.sign({
         email: req.body.email,
         userId: candidate._id
-    }, keys.jwt, { expiresIn: 1 * 60 * 60 })
+    }, keys.jwt, { expiresIn: tokenExpiresInSec })
 
     res.status(200).json({ token: token })
 }
