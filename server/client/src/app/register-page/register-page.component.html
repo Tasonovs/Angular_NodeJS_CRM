@@ -1,16 +1,18 @@
-<div class="card">
+<form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="card-content">
-        <span class="card-title">Создать аккаунт</span>
+        <span class="card-title">Регистрация</span>
         <div class="input-field">
-            <input id="email" type="email" required>
+            <input id="email" type="email" formControlName="email" [ngClass]="{'invalid': form.controls['email'].invalid && form.controls['email'].touched}">
             <label for="email">Email:</label>
+            <span class="helper-text red-text" *ngIf="form.controls['email'].invalid && form.controls['email'].touched">Некорректный email</span>
         </div>
         <div class="input-field">
-            <input id="password" type="password" required>
+            <input id="password" type="password" formControlName="password" [ngClass]="{'invalid': form.controls['password'].invalid && form.controls['password'].touched}">
             <label for="password">Пароль:</label>
+            <span class="helper-text red-text" *ngIf="form.controls['password'].invalid && form.controls['password'].touched">Некорректный пароль</span>
         </div>
     </div>
     <div class="card-action">
-        <button class="modal-action btn waves-effect">Создать</button>
+        <button class="modal-action btn waves-effect" type="submit" [disabled]="form.invalid || form.disabled">Войти</button>
     </div>
-</div>
+</form>
