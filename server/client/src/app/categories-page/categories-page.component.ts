@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Category } from '../shared/interfaces';
 import { CategoriesService } from '../shared/services/categories.service';
 
@@ -9,17 +10,12 @@ import { CategoriesService } from '../shared/services/categories.service';
 })
 export class CategoriesPageComponent implements OnInit {
 
-  isLoading = false
-  categories: Category[] = []
+  categories$!: Observable<Category[]>
 
   constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
-    this.isLoading = true
-    this.categoriesService.fetchAll().subscribe(categories => {
-      this.isLoading = false
-      this.categories = categories
-    })
+    this.categories$ = this.categoriesService.fetchAll()
   }
 
 }

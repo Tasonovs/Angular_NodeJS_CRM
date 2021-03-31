@@ -3,12 +3,20 @@
     <button class="waves-effect waves-light btn grey darken-1" routerLink='/categories/new'>Добавить категорию</button>
 </div>
 
-<div class="row" *ngIf='!isLoading'>
+<!--TODO Что???-->
+<div class="row" *ngIf="categories$ | async as categories ; else loader">
     <div class="col s12">
-        <div class="collection">
-            <a *ngFor="let category of categories" href="#!" class="collection-item">{{category.name}}</a>
+        <div class="collection" *ngIf="categories.length !== 0; else emptyCollection">
+            <a *ngFor="let category of categories" [routerLink]="['/categories', category._id]" class="collection-item">{{category.name}}</a>
         </div>
+        <ng-template #emptyCollection>
+            <div class="center">
+                <p>Пока здесь нет ни одной категории</p>
+            </div>
+        </ng-template>
     </div>
 </div>
 
-<app-loader *ngIf='isLoading'></app-loader>
+<ng-template #loader>
+    <app-loader></app-loader>
+</ng-template>
